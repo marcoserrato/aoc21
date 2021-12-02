@@ -8,6 +8,12 @@ def process_input(file)
   end
 end
 
+def process_multi_value_input(file)
+  File.open(file, 'r') do |file|
+    file.readlines.map { |line| line.gsub(/\n/, '').split }
+  end
+end
+
 def process_input_as_ints(file)
   process_input(file).map(&:to_i)
 end
