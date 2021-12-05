@@ -28,3 +28,22 @@ def process_input_to_klass(file, klass)
     klass.new(klass.members.zip(input).to_h.transform_keys { |k| k.to_sym })
   end
 end
+
+def process_bingo_input(file)
+  File.open(file, 'r') do |file|
+    lines = file.readlines
+    sequence = lines.first.split(",").map(&:to_i)
+    boards = []
+    temp = []
+
+    lines[2..-1].map do |line|
+      if line == "\n"
+        boards << temp
+        temp = []
+      else
+        temp << line.gsub(/\n/, '').split.map(&:to_i)
+      end
+    end
+    [sequence, boards]
+  end
+end
