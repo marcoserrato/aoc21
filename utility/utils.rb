@@ -47,3 +47,25 @@ def process_bingo_input(file)
     [sequence, boards]
   end
 end
+
+class Segment < Struct.new(:origin_x, :origin_y, :dest_x, :dest_y, keyword_init: true)
+  def direction
+    if origin_x - dest_x == 0
+      :y
+    elsif origin_y - dest_y == 0
+      :x
+    else
+      :diagonal
+    end
+  end
+end
+
+def process_input_segments_to_klass(file, klass)
+  inputs = File.open(file, 'r') do |file|
+    file.readlines.map { |line| line.gsub(/\n/, '').split(',').map { |r| r.split(' -> ') }.flatten.map(&:to_i) }
+  end
+  inputs.map do |input|
+    input = input.is_a?(Array) ? input : [input]
+    klass.new(klass.members.zip(input).to_h.transform_keys { |k| k.to_sym })
+  end
+end
