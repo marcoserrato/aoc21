@@ -14,6 +14,12 @@ def process_multi_value_input(file)
   end
 end
 
+def process_csv_input(file)
+  File.open(file, 'r') do |file|
+    file.readline.gsub(/\n/, '').split(',').map(&:to_i)
+  end
+end
+
 def process_input_as_ints(file)
   process_input(file).map(&:to_i)
 end
