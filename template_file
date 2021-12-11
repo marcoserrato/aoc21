@@ -1,0 +1,18 @@
+require_relative '../utility/utils.rb'
+
+day =
+process_method =
+
+input = send(process_method, file_name(day))
+sample = send(process_method, 'sample.txt')
+
+def puzzle1(input)
+end
+
+def puzzle2(input)
+end
+
+puts "Sample Puzzle 1: #{puzzle1(sample)}"
+puts "Puzzle 1: #{puzzle1(input)}"
+puts "Sample Puzzle 2: #{puzzle2(sample)}"
+puts "Puzzle 2: #{puzzle2(input)}"

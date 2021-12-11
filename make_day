@@ -1,0 +1,8 @@
+#! /usr/local/bin/fish
+set day $argv[1]
+set daydir "day"$day
+mkdir $daydir
+
+# Create a sample file
+touch $daydir"/sample.txt"
+cp template_file $daydir"/day"$day".rb"

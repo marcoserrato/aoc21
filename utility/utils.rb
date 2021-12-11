@@ -75,3 +75,21 @@ def process_input_segments_to_klass(file, klass)
     klass.new(klass.members.zip(input).to_h.transform_keys { |k| k.to_sym })
   end
 end
+
+def process_signals(file)
+  File.open(file, 'r') do |file|
+    file.readlines.map do |line|
+      line = line.gsub(/\n/, '')
+      input, output = line.split('|')
+      [input.strip, output.strip]
+    end
+  end
+end
+
+def process_grid(file)
+  File.open(file, 'r') do |file|
+    file.readlines.map do |line|
+      line.gsub(/\n/, '').split('').map(&:to_i)
+    end
+  end
+end
