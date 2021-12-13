@@ -93,3 +93,15 @@ def process_grid(file)
     end
   end
 end
+
+class PathInput < Struct.new(:from, :to, keyword_init: true)
+end
+
+def process_paths(file)
+  File.open(file, 'r') do |file|
+    file.readlines.map do |line|
+      from, to = line.gsub(/\n/, '').split('-')
+      PathInput.new(from: from, to: to)
+    end
+  end
+end
