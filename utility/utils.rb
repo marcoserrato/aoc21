@@ -105,3 +105,30 @@ def process_paths(file)
     end
   end
 end
+
+
+class Point < Struct.new(:row, :col, keyword_init: true)
+end
+
+class Fold < Struct.new(:direction, :value, keyword_init: true)
+end
+
+def process_coordinates(file)
+  input = [[],[]]
+  File.open(file, 'r') do |file|
+    file.readlines.each do |line|
+      line = line.gsub(/\n/, '')
+      next if line.empty?
+
+      if line.match?(/fold along/)
+        direction, value = line.split.last.split("=")
+        direction = direction == "y" ? :row : :col
+        input[1] << Fold.new(direction: direction, value: value.to_i)
+      else
+        col, row = line.split(',')
+        input[0] << Point.new(row: row.to_i, col: col.to_i)
+      end
+    end
+  end
+  input
+end
