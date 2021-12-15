@@ -132,3 +132,24 @@ def process_coordinates(file)
   end
   input
 end
+
+def process_polymer_template(file)
+  sequence = nil
+  template = {}
+  File.open(file, 'r') do |file|
+    file.readlines.each do |line|
+      line = line.gsub(/\n/, '')
+      next if line.empty?
+
+      from, to = line.split(' -> ')
+
+      if to.nil?
+        sequence = line
+        next
+      else
+        template[from] = to
+      end
+    end
+  end
+  [sequence, template]
+end
