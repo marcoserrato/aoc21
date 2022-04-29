@@ -133,6 +133,17 @@ def process_coordinates(file)
   input
 end
 
+def grid_to_graph(file)
+  File.open(file, 'r') do |file|
+    file.readlines.each_with_index do |line, row|
+      line = line.gsub(/\n/, '')
+      points = lines.split('')
+      points.each_with_index do |weight, col|
+      end
+    end
+  end
+end
+
 def process_polymer_template(file)
   sequence = nil
   template = {}
